@@ -8,6 +8,15 @@ namespace WebCamHandler
 {
     public class HandlerHub : Hub
     {
+        private readonly Handler _handler;
+
+        public HandlerHub() : this(Handler.Instance) { }
+
+        public HandlerHub(Handler handler)
+        {
+            _handler = handler;
+        }
+
         private List<AccessControl> _masterList = new List<AccessControl>();
 
         public void Send(string name, string message)
@@ -16,57 +25,19 @@ namespace WebCamHandler
             Clients.All.addNewMessageToPage(name, message);
         }
 
-        public void AllowAccess(string connectionId, string ipAddress)
+        public void AllowAccess(string data)
         {
-
+            Handler.Instance.ProcessAccess(data);
         }
 
         public void AddComponent(string data)
         {
-            try
-            {
-                if(!string.IsNullOrEmpty(data))
-                {
-                    AccessControl accessdata = JsonConvert.DeserializeObject<AccessControl>(data);
-
-                    if (accessdata != null)
-                    {
-                        _masterList.Add(accessdata);
-                    }
-
-                    string masterData = JsonConvert.SerializeObject(_masterList);
-
-                    Clients.All.broadCastData(masterData);
-                }
-            }
-            catch (Exception)
-            {
-                
-            }
+            Handler.Instance.AddComponent(data);
         }
 
         public void RemoveComponent(string data)
         {
-            try
-            {
-                if (!string.IsNullOrEmpty(data))
-                {
-                    AccessControl accessdata = JsonConvert.DeserializeObject<AccessControl>(data);
-
-                    if (accessdata != null)
-                    {
-                        _masterList.Remove(accessdata);
-                    }
-
-                    string masterData = JsonConvert.SerializeObject(_masterList);
-
-                    Clients.All.broadCastData(masterData);
-                }
-            }
-            catch (Exception)
-            {
-                
-            }
+            Handler.Instance.RemoveComponent(data);
         }
     }
 }
