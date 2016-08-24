@@ -12,5 +12,6 @@ namespace WebCamHandler.Models
         public bool IsServer { get; set; }
         public string ConnectionId { get; set; }
         public string IpAddress { get; set; }
+        public bool IsHost { get; set; }
     }
 }

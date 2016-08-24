@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WebCamHandler.Models;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using Newtonsoft.Json;
-using System.Threading;
 
 namespace WebCamHandler
 {
     public class Handler
     {
         private readonly static Lazy<Handler> _instance = new Lazy<Handler>(() => new Handler(GlobalHost.ConnectionManager.GetHubContext<HandlerHub>().Clients));
+
         private IHubConnectionContext<dynamic> Clients { get; set; }
 
         private Handler(IHubConnectionContext<dynamic> clients)
@@ -58,7 +55,6 @@ namespace WebCamHandler
                         {
                             _masterList.Add(accessdata);
                         }
-
                     }
 
                     string masterData = JsonConvert.SerializeObject(_masterList);
