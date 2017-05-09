@@ -10,7 +10,8 @@ namespace WebCamHandler
     {
         private readonly Handler _handler;
 
-        public HandlerHub() : this(Handler.Instance) { }
+        public HandlerHub() : this(Handler.Instance)
+        { }
 
         public HandlerHub(Handler handler)
         {
