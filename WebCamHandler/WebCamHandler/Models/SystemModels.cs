@@ -14,4 +14,12 @@ namespace WebCamHandler.Models
         public string IpAddress { get; set; }
         public bool IsHost { get; set; }
     }
+
+    public class UserData
+    {
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+        public string ConnectionId { get; set; }
+    }
 }

@@ -147,7 +147,7 @@
     <Compile Include="Hubs\Chatter.cs" />
     <Compile Include="Hubs\Handler.cs" />
     <Compile Include="Hubs\HandlerHub.cs" />
-    <Compile Include="Models\AccessControl.cs" />
+    <Compile Include="Models\SystemModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

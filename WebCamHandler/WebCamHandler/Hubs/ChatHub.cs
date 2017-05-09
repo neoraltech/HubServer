@@ -10,21 +10,45 @@ namespace WebCamHandler.Hubs
     {
         private readonly Chatter _chatter;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ChatterHub"/> class.
+        /// </summary>
         public ChatterHub() : this(Chatter.Instance)
         {
 
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ChatterHub"/> class.
+        /// </summary>
+        /// <param name="chatter">The chatter.</param>
         public ChatterHub(Chatter chatter)
         {
             _chatter = chatter;
         }
 
+        /// <summary>
+        /// Access for Users
+        /// </summary>
+        /// <param name="connectionId">The connection identifier.</param>
+        public void UserAccess(string connectionId)
+        {
+            Chatter.Instance.AddUserToList(connectionId);
+        }
+
+        /// <summary>
+        /// Access for Admins
+        /// </summary>
+        /// <param name="connectionId">The connection identifier.</param>
         public void AdminAccess(string connectionId)
         {
             Chatter.Instance.AddAdminToList(connectionId);
         }
 
+        /// <summary>
+        /// Sends the message to admin.
+        /// </summary>
+        /// <param name="message">The message.</param>
         public void SendMessageToAdmin(string message)
         {
             Chatter.Instance.SendAdminMessage(message);
