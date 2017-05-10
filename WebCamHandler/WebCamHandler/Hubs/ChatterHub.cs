@@ -31,9 +31,9 @@ namespace WebCamHandler.Hubs
         /// Access for Users
         /// </summary>
         /// <param name="connectionId">The connection identifier.</param>
-        public void UserAccess(string connectionId)
+        public void UserAccess(string userDataJson)
         {
-            Chatter.Instance.AddUserToList(connectionId);
+            Chatter.Instance.AddUserToList(userDataJson);
         }
 
         /// <summary>
