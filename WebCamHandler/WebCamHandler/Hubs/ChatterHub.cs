@@ -49,9 +49,9 @@ namespace WebCamHandler.Hubs
         /// Sends the message to admin.
         /// </summary>
         /// <param name="message">The message.</param>
-        public void SendMessageToAdmin(string message)
+        public void SendMessageToAdmin(string connectionId, string message)
         {
-            Chatter.Instance.SendAdminMessage(message);
+            Chatter.Instance.SendAdminMessage(connectionId, message);
         }
     }
 }

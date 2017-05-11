@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using WebCamHandler.Models;
-using Microsoft.AspNet.SignalR;
+﻿using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using WebCamHandler.Models;
 
 namespace WebCamHandler.Hubs
 {
@@ -66,11 +67,14 @@ namespace WebCamHandler.Hubs
         /// Sends the admin message.
         /// </summary>
         /// <param name="message">The message.</param>
-        public void SendAdminMessage(string message)
+        public void SendAdminMessage(string userConnectionId, string message)
         {
+            UserData data = _userConnectionIds.SingleOrDefault(x => x.ConnectionId == userConnectionId); //.Select(x => x.ConnectionId == userConnectionId).Select();
+            string sendMsg = data.Name + ": " + message;
+
             foreach (string connectionId in _adminConnectionIds)
             {
-                Clients.Client(connectionId).sendAdminMessage(message);
+                Clients.Client(connectionId).sendAdminMessage(sendMsg);
             }
         }
 
