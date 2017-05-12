@@ -45,6 +45,11 @@ namespace WebCamHandler.Hubs
             Chatter.Instance.AddAdminToList(connectionId);
         }
 
+        public void GetUserData()
+        {
+            Chatter.Instance.GetUserData();
+        }
+
         /// <summary>
         /// Sends the message to admin.
         /// </summary>
@@ -52,6 +57,11 @@ namespace WebCamHandler.Hubs
         public void SendMessageToAdmin(string connectionId, string message)
         {
             Chatter.Instance.SendAdminMessage(connectionId, message);
+        }
+
+        public void SendMessageToUser(string userDataJson, string message)
+        {
+            Chatter.Instance.SendUserMessage(userDataJson, message);
         }
     }
 }

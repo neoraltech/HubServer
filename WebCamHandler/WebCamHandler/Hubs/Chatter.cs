@@ -78,6 +78,16 @@ namespace WebCamHandler.Hubs
             }
         }
 
+        public void GetUserData()
+        {
+            string userData = JsonConvert.SerializeObject(_userConnectionIds);
+
+            foreach (string connectionId in _adminConnectionIds)
+            {
+                Clients.Client(connectionId).sendUserData(userData);
+            }
+        }
+
         /// <summary>
         /// Sends the user message.
         /// </summary>
@@ -87,12 +97,9 @@ namespace WebCamHandler.Hubs
         {
             UserData userData = JsonConvert.DeserializeObject<UserData>(userDataJson);
 
-            if (!_userConnectionIds.Exists(x => x.ConnectionId == userData.ConnectionId))
+            if (_userConnectionIds.Exists(x => x.ConnectionId == userData.ConnectionId))
             {
-                int userIndex = _userConnectionIds.IndexOf(userData);
-                string userConnectionId = _userConnectionIds[userIndex].ConnectionId;
-
-                Clients.Client(userConnectionId).sendUserMessage(message);
+                Clients.Client(userData.ConnectionId).sendUserMessage(message);
             }
         }
     }
